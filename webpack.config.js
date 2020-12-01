@@ -8,31 +8,29 @@ const CopyPlugin = require('copy-webpack-plugin');
 const config = {
   mode: 'development',
   devtool: 'eval-cheap-source-map',
-  entry: ['react-hot-loader/patch', './src/index.js'],
+
+  entry: './src/index.js',
+
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   },
+
   module: {
     rules: [
       {
         test: /\.s[ac]ss$/i,
         use: [
-          'style-loader', 'css-loader', 'sass-loader'
+          'style-loader',
+          'css-loader',
+          'sass-loader'
         ],
 			},
 			{
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /(node_modules|additional-scripts)/,
-        options: {
-          presets: [
-            ['@babel/preset-env', { 'useBuiltIns': 'usage', 'corejs': 3, 'targets': 'defaults' }],
-            '@babel/preset-react',
-          ],
-          plugins: ['@babel/plugin-proposal-class-properties']
-        }
       },
 			{
         test: /\.(png|jpe?g|gif|svg)$/i,
@@ -51,17 +49,17 @@ const config = {
         }
       },
 			{
-        test: /\.pdf$/i,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]'
-        }
+        test: /\.(pdf|txt)$/i,
+        use: 'raw-loader',
       }
     ]
   },
+
   plugins: [
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({ template: './src/index.html' }),
+    new HtmlWebpackPlugin({
+      template: './src/index.html'
+    }),
     new CopyPlugin({
       patterns: [
         { from: 'src/robots.txt', to: 'robots.txt' },
@@ -74,9 +72,13 @@ const config = {
   ],
   
   devServer: {
-    port: 3000,
-    contentBase: path.resolve(__dirname, 'dist'),
-    hot: true
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 7777,
+    open: true,
+    hot: true,
+    stats: 'errors-warnings',
+    overlay: true
   }
 }
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://buhowski.vercel.app/</loc>
+        <lastmod>2020-12-02T13:29:37+00:00</lastmod>
+    </url>
+    <url>
+        <loc>https://buhowski.vercel.app/about/</loc>
+        <lastmod>2020-12-02T13:29:37+00:00</lastmod>
+    </url>
+    <url>
+        <loc>https://buhowski.vercel.app/projects/</loc>
+        <lastmod>2020-12-02T13:29:37+00:00</lastmod>
+    </url>
+    <url>
+        <loc>https://buhowski.vercel.app/gallery/</loc>
+        <lastmod>2020-12-02T13:29:37+00:00</lastmod>
+    </url>
+</urlset>

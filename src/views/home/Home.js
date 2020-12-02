@@ -5,8 +5,8 @@ import Socials from '../../components/socials/Socials';
 import './Home.scss';
 
 const Home = () => {
-	useScripts('js/additional-scripts/chunk-app-drawing.js');
 	useScripts('js/additional-scripts/app-drawing.js');
+	useScripts('js/additional-scripts/chunk-app-drawing.js');
 
 	return (
 		<div className="wrapper home-wrapper d-flex">

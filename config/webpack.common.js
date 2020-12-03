@@ -7,7 +7,7 @@ module.exports = {
   entry: [paths.src + '/index.js'],
   output: {
     path: paths.build,
-    filename: '[name].bundle.js',
+    filename: 'js/[name].min.bundle.js',
     publicPath: './',
   },
 
@@ -34,6 +34,9 @@ module.exports = {
         },
         {
           from: 'src/components/additional-scripts', to: 'js/additional-scripts'
+        },
+        {
+          from: 'src/assets/fonts', to: 'assets/fonts'
         },
       ],
     }),
@@ -70,7 +73,6 @@ module.exports = {
           },
         ],
       },
-
       {
         test: /\.(png|jpe?g|gif|svg|ico)$/i,
         exclude: /assets/,

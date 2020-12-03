@@ -40,25 +40,17 @@ module.exports = merge(common, {
   },
   optimization: {
     minimizer: [
-      new CssMinimizerPlugin(),
       new TerserPlugin({
         parallel: true,
-      })
+      }),
+      new CssMinimizerPlugin(),
     ],
     runtimeChunk: {
       name: 'runtime',
     },
     splitChunks: {
-      cacheGroups: {
-        chunks: 'async',
-        default: false,
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendor_app',
-          chunks: 'all',
-          minChunks: 2
-        }
-      }
-    },
+      chunks: 'all',
+      name: 'vendor',
+    }
   },
 })

@@ -1,14 +1,14 @@
-const paths = require('./paths')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const paths = require('./paths');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: [paths.src + '/index.js'],
   output: {
     path: paths.build,
     filename: 'js/[name].min.bundle.js',
-    publicPath: './',
+    publicPath: '/',
   },
 
   plugins: [
@@ -22,12 +22,15 @@ module.exports = {
             ignore: [
               paths.public + '/robots.txt', 
               paths.public + '/sitemap.xml', 
-              paths.public + '/favicon.ico'
+              paths.public + '/favicon.ico',
             ],
           },
         },
         {
           from: paths.public + '/robots.txt', to: 'robots.txt'
+        },
+        {
+          from: '.htaccess',
         },
         {
           from: paths.public + '/sitemap.xml', to: 'sitemap.xml'

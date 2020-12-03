@@ -44,7 +44,7 @@ const App = () => {
 								<Switch location={location}>
 									{routesData.map(({pathTo, pageComponent}, i) => {
 										return (
-											<Route path={`/${pathTo}`} component={pageComponent} key={i}/>
+											<Route exact path={`/${pathTo}`} component={pageComponent} key={i}/>
 										)
 									})}
 								</Switch>

@@ -6,18 +6,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: {
     app: paths.src + '/index.js',
-    // express: paths.ex + '/express.js',
-
   },
   output: {
     path: paths.build,
     filename: 'js/[name].min.bundle.js',
     publicPath: '/',
   },
-
   plugins: [
     new CleanWebpackPlugin(),
-
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -27,6 +23,8 @@ module.exports = {
               paths.public + '/robots.txt', 
               paths.public + '/sitemap.xml', 
               paths.public + '/favicon.ico',
+              paths.public + '/express.js',
+              paths.public + '/index.html',
             ],
           },
         },

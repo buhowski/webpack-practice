@@ -7,21 +7,6 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = merge(common, {
   mode: 'production',
-  // resolve: {
-  //   fallback: {
-  //     "path": require.resolve("path-browserify"),
-  //     "zlib": false,
-  //     "crypto": false,
-  //     "stream": false,
-  //     "http": false,
-  //     "buffer": false,
-  //     "util": false
-  //   },
-  // },
-  // externals: {
-  //   fs: require("fs"),
-  //   net: require("net"),
-  // },
   devtool: false,
   output: {
     path: paths.build,

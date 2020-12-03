@@ -4,22 +4,24 @@ const common = require('./webpack.common.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const express = require('express');
-const path = require('path');
-const app = express();
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static('public'));
 
-  app.get('/*', function(req, res) {
-    res.sendFile(path.join('public', 'index.html'), function(err) {
-      if (err) {
-        res.status(500).send(err)
-      }
-    })
-  })
-}
 module.exports = merge(common, {
   mode: 'production',
+  // resolve: {
+  //   fallback: {
+  //     "path": require.resolve("path-browserify"),
+  //     "zlib": false,
+  //     "crypto": false,
+  //     "stream": false,
+  //     "http": false,
+  //     "buffer": false,
+  //     "util": false
+  //   },
+  // },
+  // externals: {
+  //   fs: require("fs"),
+  //   net: require("net"),
+  // },
   devtool: false,
   output: {
     path: paths.build,

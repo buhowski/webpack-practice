@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<script>
+			const express = require('express');
+			const path = require('path');
+			const app = express();
+
+			app.use(express.static('public'));
+
+			app.get('/*', function(req, res) {
+				res.sendFile('/index.html'), function(err) {
+					if (err) {
+						res.status(500).send(err)
+					}
+				}
+			})
+		</script>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<meta name="mobile-web-app-capable" content="yes" />

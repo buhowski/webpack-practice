@@ -4,7 +4,11 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: [paths.src + '/index.js'],
+  entry: {
+    app: paths.src + '/index.js',
+    // express: paths.ex + '/express.js',
+
+  },
   output: {
     path: paths.build,
     filename: 'js/[name].min.bundle.js',
@@ -28,9 +32,6 @@ module.exports = {
         },
         {
           from: paths.public + '/robots.txt', to: 'robots.txt'
-        },
-        {
-          from: '.htaccess',
         },
         {
           from: paths.public + '/sitemap.xml', to: 'sitemap.xml'

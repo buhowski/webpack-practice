@@ -4,16 +4,13 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: {
-    app: paths.src + '/index.js',
-  },
+  entry: paths.src + '/index.js',
   output: {
     path: paths.build,
     filename: 'js/[name].min.bundle.js',
     publicPath: '/',
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -39,41 +36,50 @@ module.exports = {
         }
       ],
     }),
-
     new HtmlWebpackPlugin({
       favicon: paths.public + '/favicon.ico',
       template: paths.public + '/index.html',
       filename: 'index.html',
     }),
+    new CleanWebpackPlugin(),
   ],
-
   module: {
     rules: [
       {
-				test: /\.js$/,
-				exclude: /(node_modules|additional-scripts)/,
+        test: /\.js$/,
+        include: paths.src,
+        exclude: /(node_modules|additional-scripts)/,
 				use: ['babel-loader']
 			},
       {
         test: /\.s[ac]ss$/,
+        include: paths.src,
         use: [
           'style-loader',
           {
             loader: 'css-loader',
-            options: { sourceMap: true, importLoaders: 1 },
+            options: {
+              sourceMap: true,
+              importLoaders: 1
+            },
           },
           {
             loader: 'postcss-loader',
-            options: { sourceMap: true }
+            options: {
+              sourceMap: true
+            }
           },
           {
             loader: 'sass-loader',
-            options: { sourceMap: true }
+            options: {
+              sourceMap: true
+            }
           },
         ],
       },
       {
         test: /\.(png|jpe?g|gif|svg|ico)$/i,
+        include: paths.src,
         exclude: /assets/,
         loader: 'file-loader',
         options: {
@@ -81,7 +87,8 @@ module.exports = {
         }
 			},
       {
-				test: /\.(eot|ttf|woff(2)?|svg)$/i,
+        test: /\.(eot|ttf|woff(2)?|svg)$/i,
+        include: paths.src,
         exclude: /views/,
         loader: 'file-loader',
         options: {
@@ -90,6 +97,7 @@ module.exports = {
       },
       {
         test: /\.(pdf)$/i,
+        include: paths.src + '/assets',
         loader: 'file-loader',
         options: {
           name: 'assets/[name].[ext]'
@@ -97,4 +105,5 @@ module.exports = {
       },
     ],
   },
+  stats: 'errors-warnings',
 }

@@ -10,7 +10,7 @@ module.exports = merge(common, {
   devtool: false,
   output: {
     path: paths.build,
-    filename: 'js/[name].min.bundle.js',
+    filename: 'js/[name].script.min.js',
     publicPath: '/',
     pathinfo: false,
   },
@@ -23,6 +23,7 @@ module.exports = merge(common, {
     rules: [
       {
         test: /\.s[ac]ss$/,
+        include: paths.src,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -39,18 +40,22 @@ module.exports = merge(common, {
     ],
   },
   optimization: {
+    minimize: true,
     minimizer: [
-      new TerserPlugin({
-        parallel: true,
-      }),
       new CssMinimizerPlugin(),
+      new TerserPlugin({
+        parallel: true
+      })
     ],
-    runtimeChunk: {
-      name: 'runtime',
-    },
+    runtimeChunk: true,
     splitChunks: {
       chunks: 'all',
       name: 'vendor',
     }
   },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 2048,
+    maxAssetSize: 2048
+  }
 })

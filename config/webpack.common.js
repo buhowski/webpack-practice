@@ -34,10 +34,7 @@ module.exports = {
         },
         {
           from: 'src/components/additional-scripts', to: 'js/additional-scripts'
-        },
-        {
-          from: 'src/assets/fonts', to: 'assets/fonts'
-        },
+        }
       ],
     }),
 
@@ -86,7 +83,7 @@ module.exports = {
         exclude: /views/,
         loader: 'file-loader',
         options: {
-          name: '../assets/fonts/[name].[ext]'
+          name: 'assets/fonts/[name].[ext]'
         }
       },
       {

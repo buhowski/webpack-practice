@@ -23,7 +23,7 @@ const Header = () => {
 	const navLinkItems = linksData.map(({pageLink, pageName}, i) => {
 		return (
 			<li className="nav-item d-flex" key={i}>
-				<NavLink className="a nav-link" to={`${pageLink}`} exact>{pageName}</NavLink>
+				<NavLink className="a nav-link" to={`${pageLink}`}>{pageName}</NavLink>
 			</li>
 		)
 	});

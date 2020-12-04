@@ -5,10 +5,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
-const webpack = require('webpack');
+const webpack = require('webpack')
 const nodeExternals = require('webpack-node-externals');
 
-const browserConfig = merge(common, {
+const buildConfig = merge(common, {
   mode: 'production',
   devtool: false,
   output: {
@@ -46,7 +46,6 @@ const browserConfig = merge(common, {
     ],
   },
   optimization: {
-    minimize: true,
     minimizer: [
       new CssMinimizerPlugin(),
       new TerserPlugin({
@@ -91,4 +90,4 @@ const serverConfig = {
   ]
 }
 
-module.exports = [browserConfig, serverConfig]
+module.exports = [buildConfig, serverConfig]

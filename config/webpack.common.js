@@ -1,6 +1,5 @@
 const paths = require('./paths');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -11,33 +10,7 @@ module.exports = {
     publicPath: '/',
   },
   plugins: [
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: paths.public, to: 'assets',
-          globOptions: {
-            ignore: [
-              paths.public + '/robots.txt', 
-              paths.public + '/sitemap.xml', 
-              paths.public + '/favicon.ico',
-              paths.public + '/express.js',
-              paths.public + '/index.html',
-            ],
-          },
-        },
-        {
-          from: paths.public + '/robots.txt', to: 'robots.txt'
-        },
-        {
-          from: paths.public + '/sitemap.xml', to: 'sitemap.xml'
-        },
-        {
-          from: 'src/components/additional-scripts', to: 'js/additional-scripts'
-        }
-      ],
-    }),
     new HtmlWebpackPlugin({
-      favicon: paths.public + '/favicon.ico',
       template: paths.public + '/index.html',
       filename: 'index.html',
     }),
@@ -47,13 +20,11 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: paths.src,
         exclude: /(node_modules|additional-scripts)/,
 				use: ['babel-loader']
 			},
       {
         test: /\.s[ac]ss$/,
-        include: paths.src,
         use: [
           'style-loader',
           {
@@ -79,7 +50,6 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg|ico)$/i,
-        include: paths.src,
         exclude: /assets/,
         loader: 'file-loader',
         options: {
@@ -88,19 +58,10 @@ module.exports = {
 			},
       {
         test: /\.(eot|ttf|woff(2)?|svg)$/i,
-        include: paths.src,
         exclude: /views/,
         loader: 'file-loader',
         options: {
           name: 'assets/fonts/[name].[ext]'
-        }
-      },
-      {
-        test: /\.(pdf)$/i,
-        include: paths.src + '/assets',
-        loader: 'file-loader',
-        options: {
-          name: 'assets/[name].[ext]'
         }
       },
     ],

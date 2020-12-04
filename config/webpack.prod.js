@@ -5,7 +5,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
-module.exports = merge(common, {
+const webpack = require('webpack');
+const nodeExternals = require('webpack-node-externals');
+
+const browserConfig = merge(common, {
   mode: 'production',
   devtool: false,
   output: {
@@ -18,6 +21,9 @@ module.exports = merge(common, {
     new MiniCssExtractPlugin({
       filename: '[name].min.css',
     }),
+    new webpack.DefinePlugin({
+      __isBrowser__: "true"
+    })
   ],
   module: {
     rules: [
@@ -59,3 +65,30 @@ module.exports = merge(common, {
     maxAssetSize: 2048
   }
 })
+
+const serverConfig = {
+  mode: "production",
+  entry: './src/components/server.js',
+  target: 'node',
+  externals: [nodeExternals()],
+  output: {
+    path: paths.build,
+    filename: 'server.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js)$/,
+        include: paths.src,
+        use: 'babel-loader'
+      }
+    ]
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      __isBrowser__: "false"
+    }),
+  ]
+}
+
+module.exports = [browserConfig, serverConfig]

@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: paths.src + '/index.js',
+  target: 'node',
   output: {
     path: paths.build,
     filename: 'js/[name].min.bundle.js',
@@ -105,5 +106,5 @@ module.exports = {
       },
     ],
   },
-  stats: 'errors-warnings',
+  // stats: 'errors-warnings',
 }
